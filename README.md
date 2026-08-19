@@ -1,0 +1,15 @@
+******************************************** AlisPrograms ****************************************
+
+Facebook = https://web.facebook.com/AlisPrograms
+
+Twitter = https://twitter.com/AlisPrograms
+
+itch.io = https://alisprograms.itch.io/
+
+paypal = paypal.me/alisprograms
+
+GitHub = https://github.com/AlisPrograms
+
+---------------------------------------------------------------------------------------------------
+Follow Me For More Programes And Games
+---------------------------------------------------------------------------------------------------
