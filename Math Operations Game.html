@@ -1,0 +1,98 @@
+<!-- Programing And Design: Ali Ayed -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الرياضيات</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <h1>Math Game</h1>
+    <button id="start">Start</button>
+    <a href="https://web.facebook.com/AlisPrograms" target="_blank"><h4>Programing And Design<span>:</span> <span>{ Ali Ayed }</span></h4></a>
+    <!-- Music And Tones -->
+    <img src="imgs/Music.png" id="mb" alt="صورة الموسيقا مفقودة">
+    <img src="imgs/Tone.png" id="tb" alt="صورة اعدادات النغمة مفقودة">
+    <audio src="music/M_1.mp3" id="m1" hidden loop autoplay></audio>
+    <audio src="tones/click.mp3" id="click" hidden stop></audio>
+<script>
+    // Design And Programing: { Ali Ayed }
+    // start button
+    b = document.getElementById('start');
+    t1 = document.getElementById("click");
+    b.onclick=()=>{
+        if (localStorage.getItem("mg_t") != "false"){
+            t1.play();
+        }
+        location.replace("levels/levels.html");
+    };
+    // mute music
+    mb = document.getElementById("mb");
+    m1 = document.getElementById("m1");
+    mb.onclick=()=>{
+        if (localStorage.getItem("mg_m") == "true" || localStorage.getItem("mg_m") == null){
+            localStorage.setItem("mg_m",false);
+            m1.pause();
+            mb.src = "imgs/Music_Mute.png";
+        }else{
+            localStorage.setItem("mg_m",true);
+            m1.play();
+            mb.src = "imgs/Music.png";
+        }
+    };
+    // mute tones
+    tb = document.getElementById("tb");
+    tb.onclick=()=>{
+        if (localStorage.getItem("mg_t") == "true" || localStorage.getItem("mg_t") == null) {
+            localStorage.setItem("mg_t",false);
+            tb.src = "imgs/Tone_Mute.png";
+        }else{
+            localStorage.setItem("mg_t",true);
+            tb.src = "imgs/Tone.png";
+        }
+    };
+    // Android //
+    // start button (Android)
+    b.addEventListener("mouseenter",()=>{
+        if(navigator.userAgent.toLowerCase().includes("android")){
+            location.replace("levels/levels.html");
+        }
+    });
+    // mute music (Android)
+    mb.addEventListener("mouseenter",()=>{
+        if(navigator.userAgent.toLowerCase().includes("android")){
+            if (localStorage.getItem("mg_m") == "true" || localStorage.getItem("mg_m") == null){
+                localStorage.setItem("mg_m",false);
+                m1.pause();
+                mb.src = "imgs/Music_Mute.png";
+            }else{
+                localStorage.setItem("mg_m",true);
+                m1.play();
+                mb.src = "imgs/Music.png";
+            }
+        }
+    });
+    // mute tones (Android)
+    tb.addEventListener("mouseenter",()=>{
+        if(navigator.userAgent.toLowerCase().includes("android")){
+            if (localStorage.getItem("mg_t") == "true" || localStorage.getItem("mg_t") == null) {
+                localStorage.setItem("mg_t",false);
+                tb.src = "imgs/Tone_Mute.png";
+            }else{
+                localStorage.setItem("mg_t",true);
+                tb.src = "imgs/Tone.png";
+            }
+        }
+    });
+    // onload
+    onload=()=>{
+        if (localStorage.getItem("mg_m") == "false"){
+            m1.pause();
+            mb.src = "imgs/Music_Mute.png";
+        }
+    }
+</script>
+</body>
+</html>

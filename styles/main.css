@@ -1,0 +1,85 @@
+/* Programing And Design: Ali Ayed */
+*{
+    box-sizing: border-box;
+    margin:0px;
+}
+body{
+    background-image: url('../imgs/img_one.jpg');
+    background-size: cover;
+}
+::selection{
+    background-color: whitesmoke;
+}
+h1{
+    text-align: center;
+    font-size: 6rem;
+    color:transparent;
+    -webkit-text-stroke: 0.1rem rgb(0, 255, 55);
+    margin: 1rem 0rem;
+}
+button{
+    font-size: 3rem;
+    color:black;
+    background-image: linear-gradient(to right,gray,white);
+    border-radius: 1.2rem;
+    width:35rem;
+    outline:none;
+    border:0.1rem gray solid;
+    position: absolute;
+    bottom:14%;
+    left:30%;
+    transition:1s ease-in
+}
+button:hover{
+    background-image: linear-gradient(to right,rgb(2, 82, 2),rgb(6, 194, 0));
+    color:white;
+    border-color:green;
+}
+h4{
+    color:rgb(255, 255, 255);
+    position: absolute;
+    bottom:5%;
+    left:41%;
+}
+span:first-of-type{
+    color:rgba(0, 238, 255, 0.774)
+}
+span:last-of-type{
+    color:rgb(0, 0, 129)
+}
+span:last-of-type:hover{
+    cursor:move;
+}
+img{
+    width:6rem;
+    position: absolute;
+    top:4%;
+}
+#tb{
+    left:8%;
+}
+@media only screen and (max-width: 1085px) {
+    *{
+        font-size:13px
+    }
+}
+@media only screen and (max-width: 900px) {
+    *{
+        font-size:11px
+    }
+}
+@media only screen and (max-width: 800px) {
+    *{
+        font-size:9px
+    }
+}
+@media only screen and (max-width: 600px) {
+    *{
+        font-size:7px
+    }
+}
+@media only screen and (max-width: 500px) {
+    *{
+        font-size:5px
+    }
+}

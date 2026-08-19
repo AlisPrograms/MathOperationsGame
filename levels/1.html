@@ -1,0 +1,163 @@
+<!-- Programing And Design: { Ali Ayed } -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الوضع السهل - Easy Mode</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <h1>Easy Mode - الوضع السهل</h1>
+    <div id="equal">8944+49849</div>
+    <input type="number" id="number" autofocus />
+    <h2 id="timer">0</h2>
+    <h2 id="score">0</h2>
+    <a href="https://web.facebook.com/AlisPrograms" target="_blank"><h4>Programing And Design<span>:</span> <span>{ Ali Ayed }</span></h4></a>
+    <img src="../imgs/Music.png" id="mb" alt="صورة الموسيقا مفقودة">
+    <img src="../imgs/Tone.png" id="tb" alt="صورة اعدادات النغمة مفقودة">
+    <audio src="../music/M_2.mp3" id="m1" hidden loop autoplay></audio>
+    <audio src="../tones/win.mp3" id="win" hidden stop></audio>
+    <audio src="../tones/lose.mp3" id="lose" hidden stop></audio>
+    <script>
+        // Programing And Design: { Ali Ayed }
+        d = document.getElementById('equal');
+        t = document.getElementById('timer');
+        n = document.getElementById('number');
+        s = document.getElementById('score');
+        win = document.getElementById("win");
+        lose = document.getElementById("lose");
+        var total = 0;
+        var array_time = [5,10,15];
+        var time = array_time[Math.floor(Math.random() * array_time.length)];
+        function plus(){
+            n1 = Math.floor(Math.random() * 10);
+            n2 = Math.floor(Math.random() * 10);
+            total = n1 + n2;
+            d.innerText =  n1.toString() + ' + ' + n2.toString();
+        }
+        function subtract(){
+            n1 = Math.floor(Math.random() * 10);
+            n2 = Math.floor(Math.random() * 11);
+            total = n1 - n2;
+            d.innerText =  n1.toString() + ' - ' + n2.toString();
+        }
+        function choice(){
+            let random_number = Math.random() * 10;
+            if (random_number > 5){
+                    plus();
+                }else{
+                    subtract();
+                }
+        }
+        function timer_(){
+            time = array_time[Math.floor(Math.random() * array_time.length)];
+            t.innerText = 'Timer' + '\n' + time.toString();
+        }
+        // timer
+        var timer_time = setInterval(() => {
+                if(time > 0){
+                    time-=1;
+                    t.innerText = 'Timer' + '\n' + time.toString();
+                }else{
+                    // Correct Answer
+                    if (n.value == total.toString()){
+                        if (localStorage.getItem("mg_t") != "false"){
+                            win.play();
+                        }
+                        alert('Correct - اجابة صحيحة');
+                        time = 0;
+                        t.innerText = 'Timer' + '\n' + time.toString();
+                        sessionStorage.setItem('mg_em_s',Number(sessionStorage.getItem('mg_em_s')) + 1)
+                        s.innerText = 'Score' + '\n' + sessionStorage.getItem('mg_em_s');
+                        n.value = '';
+                        // Open New Level
+                        if (sessionStorage.getItem('mg_em_s') == 100){
+                            localStorage.setItem('mg_l2_o',2);
+                            alert('Congrats - Level 2 Opened Now');
+                        }
+                    }else{
+                    // Wrong Answer
+                        if (localStorage.getItem("mg_t") != "false"){
+                            lose.play();
+                        }
+                        alert('! Wrong ! - The Correct Answer is ' + total.toString());
+                        time = 0;
+                        t.innerText = 'Timer' + '\n' + time.toString();
+                        n.value = '';
+                    }
+                    n.focus();
+                    timer_();
+                    choice();
+                }
+        }, 1000);
+        // mute music
+        mb = document.getElementById("mb");
+        m1 = document.getElementById("m1");
+        mb.onclick=()=>{
+            if (localStorage.getItem("mg_m") == "true" || localStorage.getItem("mg_m") == null){
+                localStorage.setItem("mg_m",false);
+                m1.pause();
+                mb.src = "../imgs/Music_Mute.png";
+            } else{
+                localStorage.setItem("mg_m",true);
+                m1.play();
+                mb.src = "../imgs/Music.png";
+            }
+        };
+        // mute tones
+        tb = document.getElementById("tb");
+        tb.onclick=()=>{
+            if (localStorage.getItem("mg_t") == "true" || localStorage.getItem("mg_t") == null) {
+                localStorage.setItem("mg_t",false);
+                tb.src = "../imgs/Tone_Mute.png";
+            }else{
+                localStorage.setItem("mg_t",true);
+                tb.src = "../imgs/Tone.png";
+            }
+        };
+        // Android //
+        // mute music (Android)
+        mb.addEventListener("mouseenter",()=>{
+            if(navigator.userAgent.toLowerCase().includes("android")){
+                if (localStorage.getItem("mg_m") == "true" || localStorage.getItem("mg_m") == null){
+                    localStorage.setItem("mg_m",false);
+                    m1.pause();
+                    mb.src = "../imgs/Music_Mute.png";
+                }else{
+                    localStorage.setItem("mg_m",true);
+                    m1.play();
+                    mb.src = "../imgs/Music.png";
+                }
+            }
+        });
+        // mute tones (Android)
+        tb.addEventListener("mouseenter",()=>{
+            if(navigator.userAgent.toLowerCase().includes("android")){
+                if (localStorage.getItem("mg_t") == "true" || localStorage.getItem("mg_t") == null) {
+                    localStorage.setItem("mg_t",false);
+                    tb.src = "../imgs/Tone_Mute.png";
+                }else{
+                    localStorage.setItem("mg_t",true);
+                    tb.src = "../imgs/Tone.png";
+                }
+            }
+        });
+        // on load
+        onload=()=>{
+            choice();
+            t.innerText = 'Timer' + '\n' + time.toString();
+            if(sessionStorage.getItem('mg_em_s') != null){
+                s.innerText = 'Score' + '\n' + sessionStorage.getItem('mg_em_s');
+            }else{
+                s.innerText = 'Score' + '\n' + 0
+            }
+            if (localStorage.getItem("mg_m") == "false"){
+                m1.pause();
+                mb.src = "../imgs/Music_Mute.png";
+            }
+        }
+    </script>
+</body>
+</html>
